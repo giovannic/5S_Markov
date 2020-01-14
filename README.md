@@ -18,7 +18,7 @@ ggplot2, shiny, foreach, evppi
 The code can be distributed, re-used, and modified.
 
 #### Contact
-Paul Schneider
-University of Sheffield
-p.schneider@sheffield.ac.uk
-https://bitowaqr.github.io/ 
+Paul Schneider  
+University of Sheffield  
+p.schneider@sheffield.ac.uk  
+https://bitowaqr.github.io/  
