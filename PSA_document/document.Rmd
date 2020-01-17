@@ -1,0 +1,37 @@
+---
+title: "PSA Document"
+runtime: shiny
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source('./Markov_PSA.R')
+```
+
+This is my document presenting a PSA for CF drug adherance _(quip here)_ _(quip there)_
+
+## Results
+
+Look at my data:
+
+```{r results, echo=FALSE}
+  plot_plane(5500)
+```
+
+You can mess around with the intervention cost too...
+
+```{r interactive, echo=FALSE}
+
+inputPanel(
+    sliderInput("int_costs_yearly",
+                "Yearly cost of the adherence intervention",
+                min = 100,
+                max = 100000,
+                value = 5500)
+)
+
+renderPlot({plot_plane(input$int_costs_yearly)})
+```
+
+
