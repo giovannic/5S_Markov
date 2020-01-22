@@ -62,8 +62,8 @@ plot_plane <- function(int_costs_yearly) {
     ### INNER MARKOV LOOP
       for(i in 1:cycle_length){
         # adjust transisiton probs for age-dependent death risk
-        step_matrix_b = death_age_fmat(mat=mat_b,x=start_age+aging)
-        step_matrix_int = death_age_fmat(mat=mat_int,x=start_age+aging)
+        step_matrix_b = death_age_fmat(mat=mat_b,x=start_age+aging,age=m$death_prob$age, value=m$death_prob$value)
+        step_matrix_int = death_age_fmat(mat=mat_int,x=start_age+aging,age=m$death_prob$age, value=m$death_prob$value)
         # Move one step in the markov chain
         markov_trace_base[i+1,]= markov_trace_base[i,] %*% step_matrix_b
         markov_trace_int[i+1,]= markov_trace_int[i,] %*% step_matrix_int
@@ -77,6 +77,7 @@ plot_plane <- function(int_costs_yearly) {
                        utils = m$state_utils,
                        costs = m$base_state_costs,
                        iv_rates = m$base_iv_days,
+                       DRQ = DR_QALY, DRC= DR_COSTS,
                        iv_disutil = m$iv_excer_disutil)
     # intervention 
     res_int  = get_CE(trace=markov_trace_int,
@@ -84,6 +85,7 @@ plot_plane <- function(int_costs_yearly) {
                        costs = m$int_state_costs,
                        extra_costs = m$int_costs_once,
                        iv_rates = m$int_iv_days,
+                       DRQ = DR_QALY, DRC= DR_COSTS,
                        iv_disutil = m$iv_excer_disutil)
     # calculate ICER
     Icer = (res_base$state_costs_disc-res_int$state_costs_disc)/ (res_base$QALY_disc - res_int$QALY_disc)

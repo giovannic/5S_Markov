@@ -7,6 +7,7 @@
 #    http://shiny.rstudio.com/
 #
 
+#install.packages('shiny', 'MCMCpack', 'ggplot2')
 library(shiny)
 source('./Markov_PSA.R')
 
